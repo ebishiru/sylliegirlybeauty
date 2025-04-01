@@ -1,9 +1,10 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const ProductsContext = createContext();
 
 const ProductsProvider = ({children}) => {
     const [ products, setProducts ] = useState([]);
+    const [ updateProducts, setUpdateProducts ] = useState(0);
 
     useEffect(()=>{
         const fetchProducts = async () => {
@@ -16,7 +17,7 @@ const ProductsProvider = ({children}) => {
             }
         };
         fetchProducts();
-    },[]);
+    },[updateProducts]);
 
     return (
         <ProductsContext.Provider value={{products, setProducts}}>

@@ -4,7 +4,8 @@ const PORT = 4000;
 
 const {
     logIn,
-    getProducts
+    getProducts,
+    addProduct
 } = require("./handlers");
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.post("/login", logIn);
 app.get("/products", getProducts)
+app.post("/product", addProduct)
 
 app.post("/login", (req, res) => {
     res.status(200).json({ message: "Test route working!" });

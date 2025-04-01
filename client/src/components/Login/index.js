@@ -60,6 +60,7 @@ const Login = () => {
                 </label>
                 <button disabled={!inputEmail || !inputPassword || status === "logging"}>Log In</button>
             </form>
+            <p>{errorMessage}</p>
         </>
     )
 }

@@ -1,7 +1,9 @@
-
+import { useContext } from "react"
+import { ProductsContext } from "../../contexts/ProductsContext";
 
 const Products = () => {
-
+    const {products} = useContext(ProductsContext);
+    
     return (
         <>
             <h2>Syllie Recommended Products</h2>

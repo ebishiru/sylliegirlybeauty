@@ -20,7 +20,7 @@ const ProductsProvider = ({children}) => {
     },[updateProducts]);
 
     return (
-        <ProductsContext.Provider value={{products, setProducts}}>
+        <ProductsContext.Provider value={{products, setProducts, updateProducts, setUpdateProducts}}>
             {children}
         </ProductsContext.Provider>
     )

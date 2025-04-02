@@ -1,6 +1,8 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { AdminContext } from "../../contexts/AdminContext";
 
 const Login = () => {
+    const { adminAccess, setAdminAccess } = useContext(AdminContext)
 
     const [ inputEmail, setInputEmail ] = useState("");
     const [ inputPassword, setInputPassword ] = useState("");
@@ -32,6 +34,7 @@ const Login = () => {
                 setErrorMessage(data.message);
             } else {
                 console.log("You are logged in!");
+                setAdminAccess(true);
             }
         } catch (error) {
             setStatus("idle");

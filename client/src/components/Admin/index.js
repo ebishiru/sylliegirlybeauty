@@ -1,6 +1,9 @@
 import { useState, useContext, use } from "react";
+import { ProductsContext } from "../../contexts/ProductsContext";
 
 const Admin = () => {
+    const { updateProducts, setUpdateProducts } = useContext(ProductsContext);
+
     const [ inputProduct, setInputProduct ] = useState("");
     const [ inputBrand, setInputBrand ] = useState("");
     const [ inputStoreUrls, setInputStoreUrls ] = useState("");
@@ -12,6 +15,7 @@ const Admin = () => {
         ev.preventDefault();
         setStatus("processing");
         setErrorMessage("");
+        // Splitting up all store links into an array
         const inputStoreUrlsArray = inputStoreUrls.split(" ");
         const productData = {
             name: inputProduct,
@@ -36,6 +40,7 @@ const Admin = () => {
                 setErrorMessage(data.message);
             } else {
                 console.log("Successfully added to Products Page");
+                setUpdateProducts(updateProducts++);
             }
         } catch (error) {
             setStatus("idle");

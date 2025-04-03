@@ -47,6 +47,7 @@ const Login = () => {
     return (
         <>
             <h2>Login Page</h2>
+            <p>sorry girlies, this is a restricted zone!!</p>
             <p>Please enter all the necessary information:</p>
             <form onSubmit={handleLogIn}>
                 <label>Email:

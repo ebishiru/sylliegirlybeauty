@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { YT_KEY, CHANNEL_ID } = process.env;
 
-const getYTVideos = async (req, res) => {
+const getYoutTubeVideos = async (req, res) => {
     
     try {
         //Fetch channel data
@@ -36,4 +36,4 @@ const getYTVideos = async (req, res) => {
     }
 };
 
-getYTVideos();
+module.exports = getYoutTubeVideos;

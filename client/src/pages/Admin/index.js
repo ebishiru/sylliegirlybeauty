@@ -1,5 +1,6 @@
 import { useState, useContext, use } from "react";
 import { ProductsContext } from "../../contexts/ProductsContext";
+import styled from "styled-components";
 
 const Admin = () => {
     const { updateProducts, setUpdateProducts } = useContext(ProductsContext);
@@ -54,9 +55,9 @@ const Admin = () => {
     }
 
     return (
-        <>
-            <h2>Admin Control Page</h2>
-            <p>Welcome Home Sylvia!!</p>
+        <StyledPage>
+            <h2>Admin Page</h2>
+            <h3>Welcome Home Sylvia!!</h3>
             <section>
                 <p>Would you like to add a new product to your Recommendation Page?</p>
                 <form onSubmit={handleSubmit}>
@@ -77,7 +78,7 @@ const Admin = () => {
                 </form>
                 <p>{errorMessage}</p>
             </section>
-        </>
+        </StyledPage>
         
 
 
@@ -85,3 +86,20 @@ const Admin = () => {
 }
 
 export default Admin;
+
+const StyledPage = styled.div`
+    margin: 2rem 0;
+    padding: 0 5rem;
+    & h2 {
+        margin: 1rem 0;
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--color-darkgreen);
+        text-shadow: 1px 1px var(--color-lightgreen);
+    }
+    & h3 {
+        margin: 2rem 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+`

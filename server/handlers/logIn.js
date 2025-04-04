@@ -26,14 +26,14 @@ const logIn = async (req, res) => {
         if (!user) {
             return res.status(400).json({
                 status: 400,
-                message: "We could not find an account with that information."
+                message: "Wrong credentials, please try again."
             });
         }
         //Verify if provided password matches that user's password
         if (user.password !== password) {
             return res.status(400).json({
                 status: 400,
-                message: "Wrong password, please try again."
+                message: "Wrong credentials, please try again."
             })
         }
         res.status(200).json({

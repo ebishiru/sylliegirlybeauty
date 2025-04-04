@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
-import Home from "./components/Home/index.js"
-import Videos from "./components/Videos/index.js"
-import Products from "./components/Products/index.js"
-import Login from "./components/Login/index.js"
-import Admin from "./components/Admin/index.js"
-import Header from "./components/Header/index.js"
+import Home from "./pages/Home/index.js"
+import Videos from "./pages/Videos/index.js"
+import Products from "./pages/Products/index.js"
+import Login from "./pages/Login/index.js"
+import Admin from "./pages/Admin/index.js"
+import Header from "./pages/Header/index.js"
 
 const App = () => {
     return (

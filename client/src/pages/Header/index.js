@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
         <>
-            <Banner src="https://yt3.googleusercontent.com/dcPSspEeFlvOosVIOORK4ZF6kPgcpJOhJJcX70Sb2cX3OV_B48fg7wtJKrTv-xkv_tuQ4G3RSA=w2276-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj"/>
+            <Banner src="https://yt3.googleusercontent.com/dcPSspEeFlvOosVIOORK4ZF6kPgcpJOhJJcX70Sb2cX3OV_B48fg7wtJKrTv-xkv_tuQ4G3RSA=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj"/>
             <NavLinkContainer>
                 <StyledNavLink to={"/"}>Home</StyledNavLink>
                 <StyledNavLink to={"/videos"}>Videos</StyledNavLink>

@@ -5,6 +5,7 @@ import Video from "./pages/Video/index.js"
 import Products from "./pages/Products/index.js"
 import Login from "./pages/Login/index.js"
 import Admin from "./pages/Admin/index.js"
+import AddProduct from "./pages/AddProduct/index.js"
 import Header from "./pages/Header/index.js"
 
 
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/products" element={<Products />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/addProduct" element={<AddProduct />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>

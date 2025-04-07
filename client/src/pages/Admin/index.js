@@ -1,87 +1,38 @@
-import { useState, useContext, use } from "react";
+import { useContext } from "react";
+import { Link } from "react-router-dom"
 import { ProductsContext } from "../../contexts/ProductsContext";
+import ProductCard from "../Products/ProductCard";
 import styled from "styled-components";
 
 const Admin = () => {
-    const { updateProducts, setUpdateProducts } = useContext(ProductsContext);
-
-    const [ inputProduct, setInputProduct ] = useState("");
-    const [ inputBrand, setInputBrand ] = useState("");
-    const [ inputStoreUrls, setInputStoreUrls ] = useState("");
-    const [ inputSrc, setInputSrc ] = useState("");
-    const [ status, setStatus ] = useState("idle");
-    const [ errorMessage, setErrorMessage ] = useState("");
+    const { products, updateProducts, setUpdateProducts } = useContext(ProductsContext);
+    let maxIndex = 0;
     
-    const handleSubmit = async (ev) => {
-        ev.preventDefault();
-        setStatus("processing");
-        setErrorMessage("");
-        // Splitting up all store links into an array
-        const inputStoreUrlsArray = inputStoreUrls.split(" ");
-        const productData = {
-            name: inputProduct,
-            brand: inputBrand,
-            storeUrls: inputStoreUrlsArray,
-            src: inputSrc
-        }
-        const body = JSON.stringify( productData );
-        const options = {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-            body
-        }
-        try {
-            const response = await fetch("/product", options);
-            const data = await response.json();
-            if (data.status !== 201) {
-                setStatus("idle");
-                setErrorMessage(data.message);
-            } else {
-                console.log("Successfully added to Products Page");
-                setStatus("idle");
-                setUpdateProducts(updateProducts + 1);
-                setInputProduct("");
-                setInputBrand("");
-                setInputStoreUrls("");
-                setInputSrc("");
-            }
-        } catch (error) {
-            setStatus("idle");
-            setErrorMessage(error.message);
-        }
+    if (products.length >= 1) {
+        maxIndex = products.length - 1;
     }
-
     return (
         <StyledPage>
             <h2>Admin Page</h2>
             <h3>Welcome Home Sylvia!!</h3>
-            <section>
-                <p>Would you like to add a new product to your Recommendation Page?</p>
-                <form onSubmit={handleSubmit}>
-                    <p>Please make sure all entries are filled out!</p>
-                    <label>Brand Name: 
-                        <input value={inputBrand} onChange={(ev)=>{setInputBrand(ev.target.value)}}></input>
-                    </label>
-                    <label>Product Name:
-                        <input value={inputProduct} onChange={(ev)=>{setInputProduct(ev.target.value)}}></input>
-                    </label>
-                    <label>Store Links, Please separate with space:
-                        <input value={inputStoreUrls} onChange={(ev)=>{setInputStoreUrls(ev.target.value)}}></input>
-                    </label>
-                    <label>Image:
-                        <input value={inputSrc} onChange={(ev)=>{setInputSrc(ev.target.value)}}></input>
-                    </label>
-                    <button disabled={!inputProduct || !inputBrand || !inputStoreUrls || !inputSrc || status === "processing"}>Submit</button>
-                </form>
-                <p>{errorMessage}</p>
-            </section>
+            <ProductsContainer>
+                    <StyledLink to="/admin/addProduct">
+                        <p>+</p>
+                    </StyledLink>
+                    { //Show all products in products
+                        products.length >= 1? (
+                            products.map((product, index) => {
+                                const reversedIndex = maxIndex - index;
+                                return (
+                                    <ProductCard key={index} productIndex={reversedIndex}/>
+                                )
+                            })
+                        ) : (
+                            <p>Loading Products</p>
+                        )
+                    }
+            </ProductsContainer>
         </StyledPage>
-        
-
-
     )
 }
 
@@ -101,5 +52,32 @@ const StyledPage = styled.div`
         margin: 2rem 0;
         font-size: 1.5rem;
         font-weight: bold;
+    }
+`
+const ProductsContainer = styled.section`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+`
+const StyledLink = styled(Link)`
+    width: 240px;
+    min-height: 240px;
+    border: 3px solid var(--color-lightgreen);
+    border-radius: 10px; 
+    text-decoration: none;
+    color: var(--color-darkgreen);
+    background-color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+
+    & p {
+        font-size: 5rem;
+    }
+
+    &:hover {
+        opacity: 1;
     }
 `

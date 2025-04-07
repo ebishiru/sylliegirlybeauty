@@ -100,6 +100,7 @@ const StyledForm = styled.form`
         margin: 0.5rem 1rem;
         padding: 0.25rem 0.5rem;
         border: 2px solid var(--color-darkpink);
+        outline-color: var(--color-darkgreen);
     }
     & button {
         margin: 1rem 0.5rem;

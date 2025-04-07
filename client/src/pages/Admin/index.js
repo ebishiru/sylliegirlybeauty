@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom"
 import { ProductsContext } from "../../contexts/ProductsContext";
-import ProductCard from "../Products/ProductCard";
+import AdminProductCard from "../Products/AdminProductCard";
 import styled from "styled-components";
 
 const Admin = () => {
-    const { products, updateProducts, setUpdateProducts } = useContext(ProductsContext);
+    const { products } = useContext(ProductsContext);
     let maxIndex = 0;
     
     if (products.length >= 1) {
@@ -24,7 +24,7 @@ const Admin = () => {
                             products.map((product, index) => {
                                 const reversedIndex = maxIndex - index;
                                 return (
-                                    <ProductCard key={index} productIndex={reversedIndex}/>
+                                    <AdminProductCard key={index} productIndex={reversedIndex}/>
                                 )
                             })
                         ) : (

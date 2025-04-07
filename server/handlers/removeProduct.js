@@ -3,7 +3,7 @@ require("dotenv").config();
 const { MONGO_URI } = process.env;
 
 const DB = "syllie_girly_beauty";
-const PRODUCTS_COLLECTION: "products";
+const PRODUCTS_COLLECTION = "products";
 
 if (!MONGO_URI) throw new Error("Your MONGO_URI is missing!");
 

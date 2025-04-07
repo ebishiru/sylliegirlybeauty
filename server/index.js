@@ -6,6 +6,7 @@ const {
     logIn,
     getProducts,
     addProduct,
+    removeProduct,
     getYoutTubeVideos
 } = require("./handlers");
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.post("/login", logIn);
 app.get("/products", getProducts)
 app.post("/product", addProduct)
+app.delete("/product", removeProduct)
 app.get("/youtubevideos", getYoutTubeVideos)
 
 app.post("/login", (req, res) => {

@@ -11,7 +11,7 @@ if (!MONGO_URI) throw new Error("Your MONGO_URI is missing!");
 // Add a single product recommendation to products
 const addProduct = async (req, res) => {
     const client = new MongoClient(MONGO_URI);
-    const { name, brand, storeUrls, src } = req.body;
+    const { name, brand, storeUrls, src, linkedVideos } = req.body;
     //Verify that all info are provided from the body
     if (!name || !brand || !storeUrls || !src) {
         return res.status(400).json({
@@ -24,7 +24,9 @@ const addProduct = async (req, res) => {
         name,
         brand,
         storeUrls,
-        src
+        src,
+        linkedVideos: linkedVideos || [],
+        toggleShow: "true"
     };
     try {
         await client.connect();

@@ -13,8 +13,10 @@
     _id: //string
     name: //string
     brand: //string
-    store_urls: //array of urls
+    storeUrls: //array of urls
     src: //array of objects { src, alt }
+    toggleShow: //string (true or false)
+    linkedVideos: //array of videoIds
 }
 
 ### Videos collection

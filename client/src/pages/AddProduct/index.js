@@ -1,14 +1,17 @@
 import { useState, useContext } from "react";
 import { ProductsContext } from "../../contexts/ProductsContext";
+import { YouTubeVideosContext } from "../../contexts/YouTubeVideosContext";
 import styled from "styled-components";
 
 const AddProduct = () => {
     const { updateProducts, setUpdateProducts } = useContext(ProductsContext);
+    const { youTubeVideos } = useContext(YouTubeVideosContext);
 
     const [ inputProduct, setInputProduct ] = useState("");
     const [ inputBrand, setInputBrand ] = useState("");
     const [ inputStoreUrls, setInputStoreUrls ] = useState("");
     const [ inputSrc, setInputSrc ] = useState("");
+    const [ inputLinkedVideos, setInputLinkedVideos ] = useState([]);
     const [ status, setStatus ] = useState("idle");
     const [ responseMessage, setResponseMessage ] = useState("");
     
@@ -22,7 +25,8 @@ const AddProduct = () => {
             name: inputProduct,
             brand: inputBrand,
             storeUrls: inputStoreUrlsArray,
-            src: inputSrc
+            src: inputSrc,
+            linkedVideos: inputLinkedVideos || [],
         }
         const body = JSON.stringify( productData );
         const options = {
@@ -84,6 +88,25 @@ const AddProduct = () => {
                             setInputSrc(ev.target.value)
                             setResponseMessage("")
                         }}></input>
+                    </label>
+                    <label>Linked YouTube videos:
+                        <select multiple onChange={(ev)=>{
+                            const selectedOptions = ev.target.selectedOptions;
+                            const selectedVideos = [];
+                            for (let i=0;i<selectedOptions.length; i++) {
+                                selectedVideos.push(selectedOptions[i].value);
+                            }
+                            setInputLinkedVideos(selectedVideos);
+                            setResponseMessage("");
+                        }}>
+                            {
+                                youTubeVideos.map((youTubeVideo, index)=>{
+                                    return (
+                                        <option value={youTubeVideo.snippet.resourceId.videoId} key={index} >{youTubeVideo.snippet.title}</option>
+                                    )
+                                })
+                            }
+                        </select>
                     </label>
                     <button disabled={!inputProduct || !inputBrand || !inputStoreUrls || !inputSrc || status === "processing"}>Submit</button>
                 </StyledForm>

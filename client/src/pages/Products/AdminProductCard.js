@@ -1,11 +1,13 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { ProductsContext } from "../../contexts/ProductsContext"
 import styled from "styled-components";
 
 const AdminProductCard = ({productIndex}) => {
     const { products, updateProducts, setUpdateProducts } = useContext(ProductsContext);
+    const [ status, setStatus ] = useState("idle");
     
     const handleDeletion = async (productId) => {
+        setStatus("deleting")
         const productInfo = {
             _id: productId
         }
@@ -23,13 +25,14 @@ const AdminProductCard = ({productIndex}) => {
             const data = await response.json();
             if (data.status !== 200) {
                 console.log(`Could not delete product with Id:${productId}.`);
+                setStatus("idle");
             } else {
                 console.log("Product successfully deleted!");
                 setUpdateProducts(updateProducts + 1);
+                setStatus("idle");
             }
         } catch (error) {
             console.log(error.message);
-            
         }
     }
 
@@ -39,7 +42,7 @@ const AdminProductCard = ({productIndex}) => {
                 products.length >= 1 ? (
                     <StyledProductCard>
                         <img src={products[productIndex].src} alt={products[productIndex].name}/>
-                        <DeleteButton onClick={()=>{
+                        <DeleteButton disabled={status === "deleting"} onClick={()=>{
                             handleDeletion(products[productIndex]._id);
                         }}>X</DeleteButton>
                         <p>{products[productIndex].brand}</p>
@@ -109,5 +112,8 @@ const DeleteButton = styled.button`
     }
     &:active {
         transform: scale(0.9);
+    }
+    &:disabled {
+        opacity: 0.5;
     }
 `

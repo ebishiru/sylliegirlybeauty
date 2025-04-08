@@ -3,26 +3,25 @@ const express = require("express");
 const PORT = 4000;
 
 const {
-    logIn,
+    getYoutTubeVideos,
     getProducts,
     addProduct,
+    editProduct,
     removeProduct,
-    getYoutTubeVideos
+    logIn,
 } = require("./handlers");
 
 const app = express();
 
 app.use(express.json());
 
-app.post("/login", logIn);
-app.get("/products", getProducts)
-app.post("/product", addProduct)
-app.delete("/product", removeProduct)
 app.get("/youtubevideos", getYoutTubeVideos)
+app.get("/products", getProducts)
 
-app.post("/login", (req, res) => {
-    res.status(200).json({ message: "Test route working!" });
-});
+app.post("/product", addProduct)
+app.patch("/product", editProduct)
+app.delete("/product", removeProduct)
 
+app.post("/login", logIn);
 
 app.listen(PORT, () => console.info(`Listening on port ${PORT}`));

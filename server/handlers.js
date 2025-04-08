@@ -1,13 +1,15 @@
-const logIn = require("./handlers/logIn");
+const getYoutTubeVideos = require("./handlers/getYouTubeVideos");
 const getProducts = require("./handlers/getProducts");
 const addProduct = require("./handlers/addProduct");
+const editProduct = require("./handlers/editProduct");
 const removeProduct = require("./handlers/removeProduct");
-const getYoutTubeVideos = require("./handlers/getYouTubeVideos");
+const logIn = require("./handlers/logIn");
 
 module.exports = {
-    logIn,
+    getYoutTubeVideos,
     getProducts,
     addProduct,
+    editProduct,
     removeProduct,
-    getYoutTubeVideos
+    logIn,
 }

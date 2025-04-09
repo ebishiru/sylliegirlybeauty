@@ -1,12 +1,15 @@
-import { useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { YouTubeVideosContext } from "../../contexts/YouTubeVideosContext";
 import styled from "styled-components";
 
-const AddProduct = () => {
-    const { updateProducts, setUpdateProducts } = useContext(ProductsContext);
+const EditProduct = () => {
+    const {productId} = useParams();
+    const { products, updateProducts, setUpdateProducts } = useContext(ProductsContext);
     const { youTubeVideos } = useContext(YouTubeVideosContext);
 
+    const [ productToEdit, setProductToEdit ] = useState(null);
     const [ inputProduct, setInputProduct ] = useState("");
     const [ inputBrand, setInputBrand ] = useState("");
     const [ inputStoreUrls, setInputStoreUrls ] = useState("");
@@ -14,23 +17,25 @@ const AddProduct = () => {
     const [ inputLinkedVideos, setInputLinkedVideos ] = useState([]);
     const [ status, setStatus ] = useState("idle");
     const [ responseMessage, setResponseMessage ] = useState("");
-    
-    const handleSubmit = async (ev) => {
+
+    const handleEdit = async (ev) => {
         ev.preventDefault();
         setStatus("processing");
         setResponseMessage("");
         // Splitting up all store links into an array
         const inputStoreUrlsArray = inputStoreUrls.split(/\s+/);
-        const productData = {
+        const editedProductData = {
+            _id: productId,
             name: inputProduct,
             brand: inputBrand,
             storeUrls: inputStoreUrlsArray,
             src: inputSrc,
             linkedVideos: inputLinkedVideos || [],
+            toggleShow: productToEdit.toggleShow,
         }
-        const body = JSON.stringify( productData );
+        const body = JSON.stringify( editedProductData );
         const options = {
-            method: "POST",
+            method: "PATCH",
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
@@ -40,18 +45,13 @@ const AddProduct = () => {
         try {
             const response = await fetch("/product", options);
             const data = await response.json();
-            if (data.status !== 201) {
+            if (data.status !== 202) {
                 setStatus("idle");
                 setResponseMessage(data.message);
             } else {
                 setStatus("idle");
-                setResponseMessage("Successfully added to Products Page")
+                setResponseMessage("Successfully edited product.")
                 setUpdateProducts(updateProducts + 1);
-                setInputProduct("");
-                setInputBrand("");
-                setInputStoreUrls("");
-                setInputSrc("");
-                setInputLinkedVideos([]);
             }
         } catch (error) {
             setStatus("idle");
@@ -59,12 +59,31 @@ const AddProduct = () => {
         }
     }
 
+    useEffect(()=>{
+        if (products.length >= 1) {
+            const foundProduct = products.find((product) => {
+                return product._id === productId;
+            })
+            if (foundProduct) {
+                setProductToEdit(foundProduct);
+                setInputProduct(foundProduct.name);
+                setInputBrand(foundProduct.brand);
+                setInputStoreUrls(foundProduct.storeUrls.join(" "));
+                setInputSrc(foundProduct.src);
+                setInputLinkedVideos(foundProduct.linkedVideos);
+            }
+        }
+    },[products, productId])
+    
+
     return (
         <StyledPage>
-            <h2>Add A Recommended Product:</h2>
-            <h3>Please make sure to fill out all entries!!</h3>
-            <section>
-                <StyledForm onSubmit={handleSubmit}>
+            <h2>Edit Product</h2>
+            <h3>Please make sure * entries are not left blank!!</h3>
+            {
+                productToEdit? (
+                    <>
+                    <StyledForm onSubmit={handleEdit}>
                     <label>Brand Name: 
                         <input value={inputBrand} onChange={(ev)=>{
                             setInputBrand(ev.target.value)
@@ -112,15 +131,16 @@ const AddProduct = () => {
                     <button disabled={!inputProduct || !inputBrand || !inputStoreUrls || !inputSrc || status === "processing"}>Submit</button>
                 </StyledForm>
                 <p>{responseMessage}</p>
-            </section>
+                </>
+                ) : (
+                    <p>Loading Product Data</p>
+                )
+            }
         </StyledPage>
-        
-
-
     )
 }
 
-export default AddProduct;
+export default EditProduct;
 
 const StyledPage = styled.div`
     margin: 2rem 0;

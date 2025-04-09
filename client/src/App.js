@@ -6,6 +6,7 @@ import Products from "./pages/Products/index.js"
 import Login from "./pages/Login/index.js"
 import Admin from "./pages/Admin/index.js"
 import AddProduct from "./pages/AddProduct/index.js"
+import EditProduct from "./pages/EditProduct/index.js"
 import Header from "./pages/Header/index.js"
 
 
@@ -21,6 +22,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/addProduct" element={<AddProduct />} />
+                <Route path="/admin/:productId" element={<EditProduct />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>

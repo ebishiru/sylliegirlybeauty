@@ -19,7 +19,7 @@ const App = () => {
         if (savedAdminAccess) {
             setAdminAccess(savedAdminAccess);
         }
-    },[])
+    },[setAdminAccess])
 
     return (
         <Router>

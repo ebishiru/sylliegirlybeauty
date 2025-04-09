@@ -71,35 +71,34 @@ const AddProduct = () => {
     return (
         <StyledPage>
             <h2>Add A Recommended Product:</h2>
-            <h3>Please make sure to fill out all entries!!</h3>
+            <h3>Please make sure to fill out * entries!!</h3>
             <section>
                 <StyledForm onSubmit={handleSubmit}>
-                    <label>Brand Name: 
+                    <label>*Brand Name: 
                         <input value={inputBrand} onChange={(ev)=>{
                             setInputBrand(ev.target.value)
                             setResponseMessage("")
                         }}></input>
                     </label>
-                    <label>Product Name:
+                    <label>*Product Name:
                         <input value={inputProduct} onChange={(ev)=>{
                             setInputProduct(ev.target.value)
                             setResponseMessage("")
                         }}></input>
                     </label>
-                    <label>Store Links:
+                    <label>*Store Links: (Please separate by line or space)
                         <textarea value={inputStoreUrls} onChange={(ev)=>{
                             setInputStoreUrls(ev.target.value)
                             setResponseMessage("")
                         }}></textarea>
                     </label>
-                    <p>(Push enter after each link)</p>
-                    <label>Image:
+                    <label>*Image:
                         <input value={inputSrc} onChange={(ev)=>{
                             setInputSrc(ev.target.value)
                             setResponseMessage("")
                         }}></input>
                     </label>
-                    <label>Linked YouTube videos:
+                    <label>Linked YouTube videos: (Hold Ctrl to unselect/select multiple)
                         <select multiple value={inputLinkedVideos} onChange={(ev)=>{
                             const selectedOptions = ev.target.selectedOptions;
                             const selectedVideos = [];
@@ -118,7 +117,9 @@ const AddProduct = () => {
                             }
                         </select>
                     </label>
+                    <ButtonContainer>
                     <button disabled={!inputProduct || !inputBrand || !inputStoreUrls || !inputSrc || status === "processing"}>Submit</button>
+                    </ButtonContainer>
                 </StyledForm>
                 <p>{responseMessage}</p>
             </section>
@@ -146,26 +147,44 @@ const StyledPage = styled.div`
         font-size: 1.5rem;
         font-weight: bold;
     }
+    & p {
+        margin: 0 1rem;
+    }
 `
 const StyledForm = styled.form`
-    max-width: 500px;
-    text-align: center;
+    max-width: 600px;
     & label {
-        display: block;
-        margin-right: 3rem;
-        text-align: right;
+        margin-left: 1rem;
     }
     & input {
-        margin: 0.5rem 1rem;
+        display: block;
+        margin: 0.5rem 0;
+        margin-left: 1rem;
         padding: 0.25rem 0.5rem;
         border: 2px solid var(--color-darkpink);
         outline-color: var(--color-darkgreen);
+        width: 500px;
     }
     & p {
         margin-bottom: 0.5rem;
     }
+    & textarea {
+        margin: 0.5rem 0;
+        margin-left: 1rem;
+        padding: 0.25rem 0.5rem;
+        border: 2px solid var(--color-darkpink);
+        width: 500px;
+        height: 5rem;
+    }
+    & select {
+        margin: 0.5rem 0;
+        margin-left: 1rem;
+        border: 2px solid var(--color-darkpink);
+        width: 520px;
+        height: 8rem;
+    }
     & button {
-        margin: 1rem 0.5rem;
+        margin: 1rem auto;
         padding: 0.5rem 1rem;
         border: 0.1rem solid var(--color-darkgreen);
         border-radius: 10px;
@@ -173,10 +192,18 @@ const StyledForm = styled.form`
         background-color: var(--color-darkgreen);
         font-weight: bold;
         text-transform: uppercase;
-
+        cursor: pointer;
+        &:active {
+            transform: scale(0.9);
+        }
         &:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
     }
+`
+const ButtonContainer = styled.div`
+    width: 520px;
+    display: flex;
+    justify-content: center;
 `

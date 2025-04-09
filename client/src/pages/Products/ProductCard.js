@@ -9,7 +9,7 @@ const ProductCard = ({productIndex}) => {
         <>
             {
                 products.length >= 1 ? (
-                    <StyledProductCard>
+                    <StyledProductCard $isShown={products[productIndex].toggleShow === "true"}>
                         <img src={products[productIndex].src} alt={products[productIndex].name}/>
                         <p>{products[productIndex].brand}</p>
                         <p>{products[productIndex].name}</p>
@@ -54,6 +54,9 @@ const StyledProductCard = styled.div`
         background-color: var(--color-darkgreen);
         text-decoration: none;
     }
+    display: ${(props)=>{
+            return props.$isShown? "inline-block" : "none"
+        }};
 `
 const UrlContainer = styled.div`
     margin: 1rem;

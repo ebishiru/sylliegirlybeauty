@@ -29,6 +29,7 @@ const Products = () => {
                 )
             }
             </ProductsContainer>
+            <h3><a href="https://bio.site/sylliepie">Don't forget to use my codes for more discounts!!</a></h3>
         </StyledPage>
     )
 }
@@ -49,6 +50,10 @@ const StyledPage = styled.div`
         margin: 2rem 0;
         font-size: 1.5rem;
         font-weight: bold;
+        & a {
+        text-decoration: none;
+        color: var(--color-darkpink);
+        }
     }
 `
 

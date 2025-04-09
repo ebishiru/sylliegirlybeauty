@@ -1,10 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { YouTubeVideosContext } from "../../contexts/YouTubeVideosContext";
+import { AdminContext } from "../../contexts/AdminContext";
 import styled from "styled-components";
 
 const EditProduct = () => {
+    const navigate = useNavigate();
+    const { adminAccess } = useContext(AdminContext);
+
     const {productId} = useParams();
     const { products, updateProducts, setUpdateProducts } = useContext(ProductsContext);
     const { youTubeVideos } = useContext(YouTubeVideosContext);
@@ -75,7 +79,11 @@ const EditProduct = () => {
         }
     },[products, productId])
     
-
+    //Verify that user is logged in
+    if (!adminAccess) {
+        return navigate("/");
+    }
+    
     return (
         <StyledPage>
             <h2>Edit Product</h2>

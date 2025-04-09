@@ -1,18 +1,23 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { YouTubeVideosContext } from "../../contexts/YouTubeVideosContext";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import VideoCard from "../Videos/VideoCard";
 import ProductCard from "../Products/ProductCard";
 import styled from "styled-components";
-import { FaYoutube, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaYoutube, FaInstagram, FaTiktok, FaUser, } from "react-icons/fa";
 
 const Home = () => {
     const { youTubeVideos } = useContext(YouTubeVideosContext);
     const { products } = useContext(ProductsContext);
-    let maxProductIndex = 0;
 
-    if ( products.length >= 1) {
-        maxProductIndex = products.length - 1;
+    //Getting last three products that aren't hidden
+    let lastThreeProducts = [];
+    if (products) {
+        const filteredProducts = products.filter((product) => product.toggleShow === "true");
+        const end = filteredProducts.length;
+        const start = end - 3;
+        lastThreeProducts = filteredProducts.slice(start, end).reverse();
     }
 
     return (
@@ -23,9 +28,10 @@ const Home = () => {
                     <h1>Syllie 🍡 Girly Beauty</h1>
                     <p>hey girly girls, welcome back!!</p>
                     <IconsContainer>
-                        <a><FaTiktok size={35} /></a>
-                        <a><FaInstagram size={40} /></a>
-                        <a><FaYoutube size={40} /></a>
+                        <a href="https://www.tiktok.com/@sylliepie"><FaTiktok size={35} /></a>
+                        <a href="https://www.instagram.com/sylliepie"><FaInstagram size={40} /></a>
+                        <a href="https://www.youtube.com/@sylliepiee"><FaYoutube size={40} /></a>
+                        <a href="https://bio.site/sylliepie"><FaUser size={35} /></a>
                     </IconsContainer>
                 </TitleText>
             </TitleContainer>
@@ -43,22 +49,24 @@ const Home = () => {
                     <p>Loading videos</p>
                 )
             }
-            <h3>For more videos, check them out on Youtube</h3>
+            <h3><StyledLink to={"/videos"}>For more videos, check them out here!!</StyledLink></h3>
             </VideosContainer>
             <ProductsContainer>
                 <h2>Newest Product Recommendations:</h2>
                 {
                 products.length >= 1? (
                     <ProductCardContainer>
-                        <ProductCard productIndex={maxProductIndex}/>
-                        <ProductCard productIndex={maxProductIndex - 1}/>
-                        <ProductCard productIndex={maxProductIndex - 2}/>
+                        {
+                            lastThreeProducts.map((product, index) => {
+                                return <ProductCard key={index} productIndex={products.indexOf(product)} />
+                            })
+                        }
                     </ProductCardContainer>
                 ) : (
                     <p>Loading products</p>
                 )
                 }
-                <h3>Click here for the full list of products</h3>
+                <h3><StyledLink to={"/products"}>Click here for the full list of syllie approved products</StyledLink></h3>
             </ProductsContainer>
             
         </>
@@ -97,6 +105,8 @@ const IconsContainer = styled.div`
     display: flex;
     & a {
         margin: 0 0.5rem;
+        text-decoration: none;
+        color: var(--color-darkpink);
     }
 `
 const VideosContainer = styled.div`
@@ -120,7 +130,10 @@ const VideoCardContainer = styled.div`
     flex-wrap: wrap;
     gap: 1rem;
 `
-
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: var(--color-darkpink);
+`
 const ProductsContainer = styled.div`
     margin: 2rem 0;
     padding: 0 5rem;

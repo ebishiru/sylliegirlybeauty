@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { YouTubeVideosContext } from "../../contexts/YouTubeVideosContext";
+import { ProductsContext } from "../../contexts/ProductsContext";
+import ProductCard from "../Products/ProductCard";
 import styled from "styled-components";
 
 const Video = () => {
     const {videoId} = useParams();
     const { youTubeVideos } = useContext(YouTubeVideosContext);
+    const { products } = useContext(ProductsContext);
     let youTubeVideo = undefined;
 
     if (youTubeVideos.length >= 1) {
@@ -19,6 +22,7 @@ const Video = () => {
             {
                 youTubeVideo ? (
                     <StyledVideoContainer>
+                        <h2>{youTubeVideo.snippet.title}</h2>
                         <StyledIframe 
                             src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} 
                             title={`${youTubeVideo.snippet.title}`} 
@@ -26,13 +30,21 @@ const Video = () => {
                             referrerPolicy="strict-origin-when-cross-origin" 
                             allowFullScreen>
                         </StyledIframe>
-                        <p>{youTubeVideo.snippet.title}</p>
                     </StyledVideoContainer>
                 ) : (
                     <p>Loading video</p>
                 )
             }
             <h2>Mentioned Recommended Products:</h2>
+            <ProductCardContainer>
+                {
+                    products.map((product, index)=>{
+                        if (product.linkedVideos.includes(videoId)) {
+                            return <ProductCard productIndex={index} key={index}></ProductCard>
+                        }
+                    })
+                }
+            </ProductCardContainer>
         </StyledPage>
     )
 }
@@ -58,11 +70,17 @@ const StyledVideoContainer = styled.div`
     max-width: 905px;
     & p {
         margin: 0.5rem;
-        font-size: 1.25rem;
+        
     }
 `
 const StyledIframe = styled.iframe`
     width: 905px; 
     height: 509px; 
     border-radius: 10px;
+`
+
+const ProductCardContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 `

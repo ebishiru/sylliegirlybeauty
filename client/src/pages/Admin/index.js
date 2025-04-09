@@ -1,19 +1,29 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ProductsContext } from "../../contexts/ProductsContext";
+import { AdminContext } from "../../contexts/AdminContext";
 import AdminProductCard from "../Products/AdminProductCard";
 import styled from "styled-components";
 
 const Admin = () => {
+    const navigate = useNavigate();
     const { products } = useContext(ProductsContext);
+    const { adminAccess } = useContext(AdminContext);
+
     let maxIndex = 0;
     
     if (products.length >= 1) {
         maxIndex = products.length - 1;
     }
+
+    //Verify that user is logged in
+    if (!adminAccess) {
+        return navigate("/");
+    }
+    
     return (
         <StyledPage>
-            <h2>Admin Page</h2>
+            <h2>Admin Controls</h2>
             <h3>Welcome Home Sylvia!!</h3>
             <ProductsContainer>
                     <StyledLink to="/admin/addProduct">

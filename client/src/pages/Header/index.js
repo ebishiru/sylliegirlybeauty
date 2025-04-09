@@ -1,10 +1,17 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react"
 import { AdminContext } from "../../contexts/AdminContext";
 import styled from "styled-components";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const Header = () => {
-    const { adminAccess } = useContext(AdminContext)
+    const navigate = useNavigate();
+    const { adminAccess, setAdminAccess } = useContext(AdminContext)
+
+    const handleLogOut = () => {
+        setAdminAccess(false);
+        navigate("/");
+    }
 
     return (
         <>
@@ -14,11 +21,10 @@ const Header = () => {
                 <StyledNavLink to={"/videos"}>Videos</StyledNavLink>
                 <StyledNavLink to={"/products"}>Products</StyledNavLink>
                 {
-                    adminAccess? (
-                        <StyledNavLink to={"/admin"}>Admin</StyledNavLink>
-                    ) : (
-                        <StyledNavLink to={"/login"}>Login</StyledNavLink>
-                    )
+                    adminAccess && <StyledNavLink to={"/admin"}>Admin</StyledNavLink>
+                }
+                {
+                    adminAccess && <StyledButton onClick={handleLogOut}><FaSignOutAlt size={20}/></StyledButton>
                 }
             </NavLinkContainer>
             
@@ -56,4 +62,15 @@ const StyledNavLink = styled(NavLink)`
         background-color: var(--color-white);
     }
     
+`
+
+const StyledButton = styled.button`
+    margin: 1rem 0.5rem;
+    padding: 0.25rem 1rem;
+    border: 0.1rem solid var(--color-darkgreen);
+    border-radius: 10px;
+    color: var(--color-white);
+    background-color: var(--color-darkgreen);
+    font-weight: bold;
+    cursor: pointer;
 `

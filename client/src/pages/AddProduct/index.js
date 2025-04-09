@@ -1,11 +1,15 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { YouTubeVideosContext } from "../../contexts/YouTubeVideosContext";
+import { AdminContext } from "../../contexts/AdminContext";
 import styled from "styled-components";
 
 const AddProduct = () => {
+    const navigate = useNavigate();
     const { updateProducts, setUpdateProducts } = useContext(ProductsContext);
     const { youTubeVideos } = useContext(YouTubeVideosContext);
+    const { adminAccess } = useContext(AdminContext);
 
     const [ inputProduct, setInputProduct ] = useState("");
     const [ inputBrand, setInputBrand ] = useState("");
@@ -59,6 +63,11 @@ const AddProduct = () => {
         }
     }
 
+    //Verify that user is logged in
+    if (!adminAccess) {
+        return navigate("/");
+    }
+    
     return (
         <StyledPage>
             <h2>Add A Recommended Product:</h2>

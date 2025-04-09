@@ -183,8 +183,6 @@ const EditButton = styled.button`
         transform: scale(0.9);
     }
 `
-
-
 const DeleteButton = styled.button`
     position: absolute;
     top: 0.5rem;
@@ -195,6 +193,7 @@ const DeleteButton = styled.button`
     border-radius: 50%;
     color: var(--color-white);
     background-color: var(--color-darkpink);
+    text-align: center;
     font-weight: bold;
 
     &:hover {

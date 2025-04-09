@@ -39,12 +39,17 @@ const Login = () => {
                 setInputEmail("");
                 setInputPassword("");
                 setAdminAccess(true);
+                localStorage.setItem("adminAccess", JSON.stringify(true));
                 navigate("/admin");
             }
         } catch (error) {
             setStatus("idle");
             setErrorMessage(error.message);
         }
+    }
+
+    if (adminAccess) {
+        return navigate("/admin");
     }
 
     return (

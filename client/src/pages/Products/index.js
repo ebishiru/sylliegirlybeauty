@@ -29,7 +29,7 @@ const Products = () => {
                 )
             }
             </ProductsContainer>
-            <h3><a href="https://bio.site/sylliepie">Don't forget to use my codes for more discounts!!</a></h3>
+            <h3><a href="https://bio.site/sylliepie" target="_blank">Don't forget to use my codes for more discounts!!</a></h3>
         </StyledPage>
     )
 }

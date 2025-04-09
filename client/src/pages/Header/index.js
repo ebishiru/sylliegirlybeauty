@@ -10,6 +10,7 @@ const Header = () => {
 
     const handleLogOut = () => {
         setAdminAccess(false);
+        localStorage.removeItem("AdminAccess");
         navigate("/");
     }
 

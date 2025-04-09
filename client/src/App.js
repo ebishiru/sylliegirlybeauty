@@ -8,9 +8,19 @@ import Admin from "./pages/Admin/index.js"
 import AddProduct from "./pages/AddProduct/index.js"
 import EditProduct from "./pages/EditProduct/index.js"
 import Header from "./pages/Header/index.js"
-
+import { AdminContext } from "./contexts/AdminContext.js"
+import { useContext, useEffect } from "react"
 
 const App = () => {
+    const { setAdminAccess } = useContext(AdminContext);
+
+    useEffect(()=>{
+        const savedAdminAccess = JSON.parse(localStorage.getItem("adminAccess"));
+        if (savedAdminAccess) {
+            setAdminAccess(savedAdminAccess);
+        }
+    },[])
+
     return (
         <Router>
             <Header />

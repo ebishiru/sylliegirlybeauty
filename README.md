@@ -61,6 +61,8 @@ All the products are listed here. New products can be added by clicking on the e
 
 Only accessible by the admin, a form can be completed to add more entries to the recommended products database.
 
+![Image](https://github.com/user-attachments/assets/a9b48b7b-78f5-4f1d-9068-1205ca2d7083)
+
 **8. Edit Product Page**
 
 Products details may also be adjusted here or updated to fit certain needs.

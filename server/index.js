@@ -24,4 +24,8 @@ app.delete("/product", removeProduct)
 
 app.post("/login", logIn);
 
+app.get("/", (req, res) => {
+    res.send("Backend is running 🚀");
+});
+
 app.listen(PORT, () => console.info(`Listening on port ${PORT}`));

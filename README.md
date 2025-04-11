@@ -76,6 +76,7 @@ Please note that an `.env` file will be required to host the backend.
 
 .env will need to have keys for `MONGO_URI`, `YT_KEY` & `CHANNEL_ID`.
 
+For simplicity, I used Render for BE and Vercel for FE.
 ---
 
 ## Closing Remarks:

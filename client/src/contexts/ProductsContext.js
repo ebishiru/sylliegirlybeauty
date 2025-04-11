@@ -9,7 +9,7 @@ const ProductsProvider = ({children}) => {
     useEffect(()=>{
         const fetchProducts = async () => {
             try {
-                const response = await fetch("/products");
+                const response = await fetch("https://sylliegirlybeauty.onrender.com/products");
                 const { data } = await response.json();
                 setProducts(data);
             } catch (error) {

@@ -8,7 +8,7 @@ const YouTubeVideosProvider = ({children}) => {
     useEffect(()=>{
         const fetchYouTubeVideos = async () => {
             try {
-                const response = await fetch("/youtubevideos");
+                const response = await fetch("https://sylliegirlybeauty.onrender.com/youtubevideos");
                 const { data } = await response.json();
                 setYouTubeVideos(data);
             } catch (error) {

@@ -42,7 +42,7 @@ const AddProduct = () => {
             body
         }
         try {
-            const response = await fetch("/product", options);
+            const response = await fetch("https://sylliegirlybeauty.onrender.com/product", options);
             const data = await response.json();
             if (data.status !== 201) {
                 setStatus("idle");

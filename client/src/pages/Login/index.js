@@ -30,7 +30,7 @@ const Login = () => {
             body
         }
         try {
-            const response = await fetch("/logIn", options);
+            const response = await fetch("https://sylliegirlybeauty.onrender.com/logIn", options);
             const data = await response.json();
             if (data.status !==200) {
                 setStatus("idle");

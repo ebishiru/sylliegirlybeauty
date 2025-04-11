@@ -28,7 +28,7 @@ const AdminProductCard = ({productIndex}) => {
             body
         }
         try {
-            const response = await fetch("/product", options);
+            const response = await fetch("https://sylliegirlybeauty.onrender.com/product", options);
             const data = await response.json();
             if (data.status !== 202) {
                 console.log(`Could not toggle show/hide for product with Id:${product._id}`);
@@ -58,7 +58,7 @@ const AdminProductCard = ({productIndex}) => {
             body
         }
         try {
-            const response = await fetch("/product", options);
+            const response = await fetch("https://sylliegirlybeauty.onrender.com/product", options);
             const data = await response.json();
             if (data.status !== 200) {
                 console.log(`Could not delete product with Id:${productId}.`);

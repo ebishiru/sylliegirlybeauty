@@ -51,8 +51,8 @@ const editProduct = async (req, res) => {
             message: "Product successfully updated."
         })
     } catch (error) {
-        res.status(500).json({
-            status: 500,
+        res.status(502).json({
+            status: 502,
             message: error.message
         })
     } finally {

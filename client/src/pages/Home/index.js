@@ -12,12 +12,12 @@ const Home = () => {
     const { products } = useContext(ProductsContext);
 
     //Getting last three products that aren't hidden
-    let lastThreeProducts = [];
+    let lastFiveProducts = [];
     if (products) {
         const filteredProducts = products.filter((product) => product.toggleShow === "true");
         const end = filteredProducts.length;
-        const start = end - 3;
-        lastThreeProducts = filteredProducts.slice(start, end).reverse();
+        const start = end - 5;
+        lastFiveProducts = filteredProducts.slice(start, end).reverse();
     }
 
     return (
@@ -57,7 +57,7 @@ const Home = () => {
                 products.length >= 1? (
                     <ProductCardContainer>
                         {
-                            lastThreeProducts.map((product, index) => {
+                            lastFiveProducts.map((product, index) => {
                                 return <ProductCard key={index} productIndex={products.indexOf(product)} />
                             })
                         }

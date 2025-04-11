@@ -14,7 +14,7 @@ const getYoutTubeVideos = async (req, res) => {
         //Get upload playlist id from channel data
         const uploadsId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
 
-        //Fetch uploaded videos data
+        //Fetch uploaded videos data (max 50 videos without Auth0)
         const apiVideosDataUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&key=${YT_KEY}&maxResults=50`
         const apiVideosResponse = await fetch(apiVideosDataUrl);
         if (!apiVideosResponse.ok) {
@@ -26,11 +26,10 @@ const getYoutTubeVideos = async (req, res) => {
             status: 200, 
             data: videos
         });
-        //Verify that the videos are not shorts and are longer than a minute (STRETCH GOAL)
+        // Primary keys that are needed for frontend:
         // data[0].snippet.title >> title
-        // data[0].snippet.thumbnails.high.url >>> 
+        // data[0].snippet.thumbnails.high.url >>> img
         // data[0].snippet.resourceId.videoId >>> url
-
     } catch (err) {
         throw err;
     }

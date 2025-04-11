@@ -33,8 +33,8 @@ const addProduct = async (req, res) => {
         const db = client.db(DB);
         const result = await db.collection(PRODUCTS_COLLECTION).insertOne(newProduct);
         if (!result.acknowledged) {
-            return res.status(500).json({
-                status: 500,
+            return res.status(400).json({
+                status: 400,
                 message: "Product Recommendation was not added."
             })
         } else {

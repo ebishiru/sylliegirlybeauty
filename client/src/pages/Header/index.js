@@ -57,7 +57,6 @@ const StyledNavLink = styled(NavLink)`
     font-weight: bold;
     text-transform: uppercase;
     text-decoration: none;
-
     &.active {
         color: var(--color-darkgreen);
         background-color: var(--color-white);

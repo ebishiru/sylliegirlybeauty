@@ -15,7 +15,7 @@ const getYoutTubeVideos = async (req, res) => {
         const uploadsId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
 
         //Fetch uploaded videos data
-        const apiVideosDataUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&key=${YT_KEY}&maxResults=30`
+        const apiVideosDataUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&key=${YT_KEY}&maxResults=50`
         const apiVideosResponse = await fetch(apiVideosDataUrl);
         if (!apiVideosResponse.ok) {
             throw new Error ("Unable to access YouTube Api V3 to collect videos data")

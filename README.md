@@ -4,6 +4,9 @@ Hello! This is my first ever solo full-stack project.
 
 This website was primarily created for my partner (Sylvia), to promote her beauty and video content.
 
+Live: https://sylliegirlybeauty.vercel.app/
+Backend: https://sylliegirlybeauty.onrender.com/
+
 ## Pages Overview
 
 | Path                  | Page              |

@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require("cors");
+
 const { PORT } = process.env;
 
 const {
@@ -13,6 +15,9 @@ const {
 const app = express();
 
 app.use(express.json());
+app.use(cors({
+    origin: "https://sylliegirlybeauty.vercel.app/"
+}));
 
 app.get("/youtubevideos", getYoutTubeVideos)
 app.get("/products", getProducts)

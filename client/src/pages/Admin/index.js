@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { ProductsContext } from "../../contexts/ProductsContext";
 import { AdminContext } from "../../contexts/AdminContext";
@@ -10,10 +10,36 @@ const Admin = () => {
     const { products } = useContext(ProductsContext);
     const { adminAccess } = useContext(AdminContext);
 
-    let maxIndex = 0;
-    
-    if (products.length >= 1) {
-        maxIndex = products.length - 1;
+    const [ currentPage, setCurrentPage ] = useState(1);
+    const productsPerPage = 29;
+
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const totalPagesArray = [];
+    for (let i=1; i<= totalPages; i++) {
+        totalPagesArray.push(i);
+    }
+
+    const startIndex = (currentPage - 1)*productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    const reversedProducts = products.map((product, index) => {
+        const reverseIndex = products.length - 1 - index;
+        return products[reverseIndex];
+    })
+    const currentProducts = reversedProducts.slice(startIndex, endIndex);
+
+    const goToPreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage( currentPage - 1);
+        }
+    }
+    const goToNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage( currentPage + 1);
+        }
+    }
+    const goToPage = (pageNumber) => {
+        setCurrentPage(pageNumber);
     }
 
     //Verify that user is logged in
@@ -30,11 +56,10 @@ const Admin = () => {
                         <p>+</p>
                     </StyledLink>
                     { //Show all products in products
-                        products.length >= 1? (
-                            products.map((product, index) => {
-                                const reversedIndex = maxIndex - index;
+                        currentProducts.length >= 1? (
+                            currentProducts.map((product, index) => {
                                 return (
-                                    <AdminProductCard key={index} productIndex={reversedIndex}/>
+                                    <AdminProductCard key={index} productIndex={products.length - 1 - (startIndex + index)}/>
                                 )
                             })
                         ) : (
@@ -42,6 +67,17 @@ const Admin = () => {
                         )
                     }
             </ProductsContainer>
+            <PaginationContainer>
+                <StyledButton disabled={currentPage === 1} onClick={goToPreviousPage} >Previous</StyledButton>
+                {
+                    totalPagesArray.map((page) => {
+                        return (
+                            <button key={page} onClick={() => {goToPage(page)}} className={currentPage === page? "active" : ""}>{page}</button>
+                        )
+                    })
+                }
+                <StyledButton disabled={currentPage === totalPages} onClick={goToNextPage} >Next</StyledButton>
+            </PaginationContainer>
         </StyledPage>
     )
 }
@@ -90,4 +126,36 @@ const StyledLink = styled(Link)`
     &:hover {
         opacity: 1;
     }
+`
+const PaginationContainer = styled.section`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem;
+    & button {
+        font-family: "Yeseva One", serif;
+	    font-weight: 400;
+	    font-style: normal;
+        padding: 0.25rem 1rem;
+        border: 0.1rem solid var(--color-darkgreen);
+        border-radius: 10px;
+        color: var(--color-white);
+        background-color: var(--color-darkgreen);
+        text-transform: uppercase;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+    & button.active {
+            color: var(--color-darkgreen);
+            background-color: var(--color-white);
+        }
+`
+const StyledButton = styled.button`
+    width: 8rem;
+    font-size: 1rem;
 `

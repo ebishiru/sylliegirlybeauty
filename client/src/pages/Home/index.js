@@ -49,7 +49,7 @@ const Home = () => {
                     <p>Loading videos</p>
                 )
             }
-            <h3><StyledLink to={"/videos"}>For more videos, check them out here!!</StyledLink></h3>
+            <h3>For more videos, check the <StyledLink to={"/videos"}>Videos Page</StyledLink>!!</h3>
             </VideosContainer>
             <ProductsContainer>
                 <h2>Newest Product Recommendations:</h2>
@@ -66,7 +66,7 @@ const Home = () => {
                     <p>Loading products</p>
                 )
                 }
-                <h3><StyledLink to={"/products"}>Click here for the full list of syllie approved products</StyledLink></h3>
+                <h3>Want more syllie approved goodies? check out the <StyledLink to={"/products"}>Products Page</StyledLink></h3>
             </ProductsContainer>
             
         </>
@@ -87,6 +87,16 @@ const TitleContainer = styled.div`
     & img {
         margin: 0;
         border-radius: 50%;
+    }
+    @media (max-width: 740px) {
+        display: block;
+        height: auto;
+        border: none;
+        text-align: center;
+        & div {
+            display: block;
+
+        }
     }
 `
 const TitleText = styled.div`
@@ -129,9 +139,11 @@ const VideoCardContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    @media (max-width: 740px) {
+        justify-content: center;
+    }
 `
 const StyledLink = styled(Link)`
-    text-decoration: none;
     color: var(--color-darkpink);
 `
 const ProductsContainer = styled.div`

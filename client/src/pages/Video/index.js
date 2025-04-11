@@ -17,6 +17,10 @@ const Video = () => {
         })
     }
 
+    const mentionedProducts = products.filter((product)=>{
+        return product.linkedVideos.includes(videoId);
+    })
+
     return (
         <StyledPage>
             {
@@ -35,16 +39,25 @@ const Video = () => {
                     <p>Loading video</p>
                 )
             }
-            <h2>Mentioned Recommended Products:</h2>
-            <ProductCardContainer>
-                {
-                    products.map((product, index)=>{
-                        if (product.linkedVideos.includes(videoId)) {
-                            return <ProductCard productIndex={index} key={index}></ProductCard>
+            {
+                mentionedProducts.length >= 1 ? (
+                    <>
+                        <h2>Mentioned Recommended Products:</h2>
+                        <ProductCardContainer>
+                        {
+                            products.map((product, index)=>{
+                                if (product.linkedVideos.includes(videoId)) {
+                                    return <ProductCard productIndex={index} key={index}></ProductCard>
+                                }
+                            })
                         }
-                    })
-                }
-            </ProductCardContainer>
+                        </ProductCardContainer>
+                    </>
+                ) : (
+                    <></>
+                )
+            }
+            
         </StyledPage>
     )
 }
@@ -68,17 +81,12 @@ const StyledPage = styled.div`
 `
 const StyledVideoContainer = styled.div`
     max-width: 905px;
-    & p {
-        margin: 0.5rem;
-        
-    }
 `
 const StyledIframe = styled.iframe`
-    width: 905px; 
-    height: 509px; 
+    width: 100%;
+    aspect-ratio: 16 / 9;
     border-radius: 10px;
 `
-
 const ProductCardContainer = styled.div`
     display: flex;
     flex-wrap: wrap;

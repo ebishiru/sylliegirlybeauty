@@ -62,7 +62,7 @@ const Videos = () => {
                 }
                 <StyledButton disabled={currentPage === totalPages} onClick={goToNextPage} >Next</StyledButton>
             </PaginationContainer>
-            <h3>If you're looking for even more videos, check out my YouTube!</h3>
+            <h3>If you're looking for even more videos, check out <a href="https://www.youtube.com/@sylliepiee">my YouTube!</a></h3>
         </StyledPage>
     )
 }
@@ -84,15 +84,16 @@ const StyledPage = styled.div`
         font-size: 1.5rem;
         font-weight: bold;
     }
+    & a {
+        color: var(--color-darkpink);
+    }
 `
-
 const VideosContainer = styled.section`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
 `
-
 const PaginationContainer = styled.section`
     display: flex;
     flex-wrap: wrap;
@@ -117,14 +118,11 @@ const PaginationContainer = styled.section`
             cursor: not-allowed;
         }
     }
-
     & button.active {
             color: var(--color-darkgreen);
             background-color: var(--color-white);
         }
 `
-
-
 const StyledButton = styled.button`
     width: 8rem;
     font-size: 1rem;

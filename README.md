@@ -1,11 +1,10 @@
 ﻿# Syllie Girly Beauty Website
 
-Hello! This is my first ever solo full-stack project.
+Hello! This is my first solo full-stack project!! (Using MERN)
 
 This website was primarily created for my partner (Sylvia), to promote her beauty and video content.
 
 Live: https://sylliegirlybeauty.vercel.app/
-Backend: https://sylliegirlybeauty.onrender.com/
 
 ## Pages Overview
 
@@ -28,12 +27,12 @@ Backend: https://sylliegirlybeauty.onrender.com/
 **1. Home Page**
 
 Sylvia's TikTok, Instagram, YouTube and Bio links can be visited by clicking on the appropriate icons.
-Additionally, the home page includes the latest YouTube videos (4) and newest product recommendations (5) by Syllie.
+Additionally, the home page includes the latest YouTube videos (4) and the newest product recommendations (5) by Syllie.
 
 
 **2. Videos Page**
 
-A list of YouTube Videos and Shorts are shown, ordered from their upload date. The videos are limited to 20 a page with pagination options below.
+A list of YouTube Videos and Shorts are shown, ordered from their upload date. The videos are limited to 20 per page with pagination options below.
 Clicking on the videos brings you to their appropriate video page.
 
 
@@ -56,7 +55,7 @@ From here, the required credentials will be required to access further.
 
 **6. Admin Page**
 
-All the products are listed here. New products can be added by clicking on the empty `+` block. Additionally, each product can be editted, toggled `Show` or `Hide` and deleted, with their appropriate buttons.
+All the products are listed here. New products can be added by clicking on the empty `+` block. Additionally, each product can be edited, toggled `Show` or `Hide` and deleted, with their appropriate buttons.
 
 ![Image](https://github.com/user-attachments/assets/118f62f2-bf1d-4a7d-95a8-8f88d7a3660e)
 
@@ -68,7 +67,7 @@ Only accessible by the admin, a form can be completed to add more entries to the
 
 **8. Edit Product Page**
 
-Products details may also be adjusted here or updated to fit certain needs.
+The products' details may also be adjusted here or updated to fit certain needs.
 Likewise, it is only accessible by the admin.
 
 ---
@@ -77,9 +76,9 @@ Likewise, it is only accessible by the admin.
 
 Please note that an `.env` file will be required to host the backend.
 
-.env will need to have keys for `MONGO_URI`, `YT_KEY` & `CHANNEL_ID`.
+.env will need to have keys for `MONGO_URI`, `YT_KEY` `PORT` & `CHANNEL_ID`.
 
-For simplicity, I used Render for BE and Vercel for FE.
+For simplicity, I decided to use Render to host the Backend and Vercel for Frontend.
 ---
 
 ## Closing Remarks:

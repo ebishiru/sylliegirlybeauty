@@ -79,6 +79,7 @@ Please note that an `.env` file will be required to host the backend.
 .env will need to have keys for `MONGO_URI`, `YT_KEY` `PORT` & `CHANNEL_ID`.
 
 For simplicity, I decided to use Render to host the Backend and Vercel for Frontend.
+
 ---
 
 ## Closing Remarks:
